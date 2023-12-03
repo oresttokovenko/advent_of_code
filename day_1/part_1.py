@@ -1,4 +1,4 @@
-with open("input", "r") as f:
+with open("input.txt", "r") as f:
     input = [line.strip() for line in f]
 
 total = 0

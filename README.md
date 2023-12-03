@@ -4,5 +4,5 @@ To conveniently fetch the puzzle inputs directly into your local setup, you can 
 
 ```bash
 curl 'https://adventofcode.com/2023/day/1/input' -H 'cookie: session=YourSessionCookieHere' \
-  -H 'user-agent: YourUserAgentHere' --compressed >> input
+  -H 'user-agent: YourUserAgentHere' --compressed >> input.txt
 ```
