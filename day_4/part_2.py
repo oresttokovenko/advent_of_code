@@ -23,4 +23,3 @@ for i, j in enumerate(matches_list):
 
 total = sum(copies)
 print(total)
- 
