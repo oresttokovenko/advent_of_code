@@ -1,7 +1,12 @@
 from collections import Counter
 from dataclasses import dataclass, field
 
-with open("example.txt", "r") as f:
+# for debugging
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
+with open("input.txt", "r") as f:
+# with open("example.txt", "r") as f:
     input = [i.strip("\n") for i in f.readlines()]
 
 winnings = 0
@@ -52,10 +57,10 @@ class CamelCard:
         else:
             self.type = "high_card"
 
-# instantiating a list of CamelCards
+# instantiating a list of CamelCards, assigning arbitrary ranking for bubble sort
 list_of_hands = [
     CamelCard(hand=pair[0], bid=int(pair[1]), rank=idx)
-    for idx, i in enumerate(input)
+    for idx, i in enumerate(input, start=1)
     for pair in zip(i.split()[::2], i.split()[1::2])
 ]
 
@@ -66,25 +71,26 @@ for i in range(n):
         # comparing based on the hand type ranking
         if hand_rankings[list_of_hands[j].type] < hand_rankings[list_of_hands[j+1].type]:
             list_of_hands[j], list_of_hands[j+1] = list_of_hands[j+1], list_of_hands[j]
+            # swapping ranks as well
+            list_of_hands[j].rank, list_of_hands[j+1].rank = list_of_hands[j+1].rank, list_of_hands[j].rank
         # comparing based on the card rankings if hand type ranking is same
         elif hand_rankings[list_of_hands[j].type] == hand_rankings[list_of_hands[j+1].type]:
             card_a = [card_rankings[i] if i in card_rankings else int(i) for i in list_of_hands[j].hand]
             card_b = [card_rankings[i] if i in card_rankings else int(i) for i in list_of_hands[j+1].hand]
             for ii, jj in zip(card_a, card_b):
-                if ii > jj:
+                if ii < jj:
                     list_of_hands[j], list_of_hands[j+1] = list_of_hands[j+1], list_of_hands[j]
+                    # swapping ranks as well
+                    list_of_hands[j].rank, list_of_hands[j+1].rank = list_of_hands[j+1].rank, list_of_hands[j].rank
                     break
-                elif ii < jj:
+                elif ii > jj:
                     break
 
-# incrementing each rank by 1
-list_of_hands = [
-    CamelCard(hand=card.hand, bid=card.bid, rank=card.rank + 1) 
-    for card in list_of_hands
-]
+# assigning ranks from 5 down to 1
+for idx, card in enumerate(list_of_hands):
+    card.rank = n - idx
 
 for i in list_of_hands:
-    print(i.hand, i.bid, i.rank)
     product = i.bid * i.rank
     winnings += product
 
