@@ -1,12 +1,7 @@
 from collections import Counter
 from dataclasses import dataclass, field
 
-# for debugging
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-
 with open("input.txt", "r") as f:
-# with open("example.txt", "r") as f:
     input = [i.strip("\n") for i in f.readlines()]
 
 winnings = 0
