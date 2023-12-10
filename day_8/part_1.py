@@ -16,7 +16,7 @@ class Node:
 
 nodes = [Node(element=i[0], left=i[1], right=i[2]) for i in elements]
 
-start_node = [i for i in nodes if i.element.endswith("A")][0]
+start_node = [i for i in nodes if i.element.endswith("AAA")][0]
 
 current_node = start_node
 steps = 0
