@@ -13,17 +13,11 @@ hand_rankings = {
     "three_of_a_kind": 4,
     "full_house": 5,
     "four_of_a_kind": 6,
-    "five_of_a_kind": 7
+    "five_of_a_kind": 7,
 }
 
-card_rankings = {
-    'A': 14,
-    'K': 13,
-    'Q': 12,
-    'J': 11,
-    'T': 10,
-    'J': 1
-}
+card_rankings = {"A": 14, "K": 13, "Q": 12, "J": 11, "T": 10, "J": 1}
+
 
 @dataclass
 class CamelCard:
@@ -40,15 +34,15 @@ class CamelCard:
         1. initializing a Counter for the original hand to keep track of card frequencies,
            including jokers. This is stored in original_hand_labels
 
-        2. calling the joker_replace method to replace any jokers in the hand with 
-           the most frequent card found in the original hand. This step is intended to 
+        2. calling the joker_replace method to replace any jokers in the hand with
+           the most frequent card found in the original hand. This step is intended to
            strengthen the hand by replacing jokers with the most advantageous card
 
-        3. reinitializing the hand_labels Counter for the modified hand (post joker replacement) 
+        3. reinitializing the hand_labels Counter for the modified hand (post joker replacement)
            for accurate frequency tracking of the current hand composition
 
-        4. initializing the hand type based on the current hand composition by calling 
-           the hand_type method. This sets the type attribute, categorizing the hand 
+        4. initializing the hand type based on the current hand composition by calling
+           the hand_type method. This sets the type attribute, categorizing the hand
            according to the rules of the game
         """
         self.original_hand_labels = Counter(self.original_hand)
@@ -76,13 +70,14 @@ class CamelCard:
         # fetching the element with the highest count, second highest count if J is highest
         if self.original_hand_labels.most_common(1)[0][0] != "J":
             highest_card = self.original_hand_labels.most_common(1)[0][0]
-        else: 
+        else:
             try:
                 highest_card = self.original_hand_labels.most_common(2)[1][0]
             # addressing edge case where each card is a J
             except IndexError:
                 highest_card = "J"
         self.hand = self.original_hand.replace("J", highest_card)
+
 
 # instantiating a list of CamelCards, assigning arbitrary ranking for bubble sort
 list_of_hands = [
@@ -91,26 +86,48 @@ list_of_hands = [
     for pair in zip(i.split()[::2], i.split()[1::2])
 ]
 
-# print(list_of_hands[1])
-
 n = len(list_of_hands)
 
 for i in range(n):
-    for j in range(0, n-i-1):
+    for j in range(0, n - i - 1):
         # comparing based on the hand type ranking
-        if hand_rankings[list_of_hands[j].type] < hand_rankings[list_of_hands[j+1].type]:
-            list_of_hands[j], list_of_hands[j+1] = list_of_hands[j+1], list_of_hands[j]
+        if (
+            hand_rankings[list_of_hands[j].type]
+            < hand_rankings[list_of_hands[j + 1].type]
+        ):
+            list_of_hands[j], list_of_hands[j + 1] = (
+                list_of_hands[j + 1],
+                list_of_hands[j],
+            )
             # swapping ranks as well
-            list_of_hands[j].rank, list_of_hands[j+1].rank = list_of_hands[j+1].rank, list_of_hands[j].rank
+            list_of_hands[j].rank, list_of_hands[j + 1].rank = (
+                list_of_hands[j + 1].rank,
+                list_of_hands[j].rank,
+            )
         # comparing based on the card rankings if hand type ranking is same
-        elif hand_rankings[list_of_hands[j].type] == hand_rankings[list_of_hands[j+1].type]:
-            card_a = [card_rankings[i] if i in card_rankings else int(i) for i in list_of_hands[j].original_hand]
-            card_b = [card_rankings[i] if i in card_rankings else int(i) for i in list_of_hands[j+1].original_hand]
+        elif (
+            hand_rankings[list_of_hands[j].type]
+            == hand_rankings[list_of_hands[j + 1].type]
+        ):
+            card_a = [
+                card_rankings[i] if i in card_rankings else int(i)
+                for i in list_of_hands[j].original_hand
+            ]
+            card_b = [
+                card_rankings[i] if i in card_rankings else int(i)
+                for i in list_of_hands[j + 1].original_hand
+            ]
             for ii, jj in zip(card_a, card_b):
                 if ii < jj:
-                    list_of_hands[j], list_of_hands[j+1] = list_of_hands[j+1], list_of_hands[j]
+                    list_of_hands[j], list_of_hands[j + 1] = (
+                        list_of_hands[j + 1],
+                        list_of_hands[j],
+                    )
                     # swapping ranks as well
-                    list_of_hands[j].rank, list_of_hands[j+1].rank = list_of_hands[j+1].rank, list_of_hands[j].rank
+                    list_of_hands[j].rank, list_of_hands[j + 1].rank = (
+                        list_of_hands[j + 1].rank,
+                        list_of_hands[j].rank,
+                    )
                     break
                 elif ii > jj:
                     break

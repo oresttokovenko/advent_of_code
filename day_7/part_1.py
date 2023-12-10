@@ -13,16 +13,11 @@ hand_rankings = {
     "three_of_a_kind": 4,
     "full_house": 5,
     "four_of_a_kind": 6,
-    "five_of_a_kind": 7
+    "five_of_a_kind": 7,
 }
 
-card_rankings = {
-    'A': 14,
-    'K': 13,
-    'Q': 12,
-    'J': 11,
-    'T': 10
-}
+card_rankings = {"A": 14, "K": 13, "Q": 12, "J": 11, "T": 10}
+
 
 @dataclass
 class CamelCard:
@@ -52,6 +47,7 @@ class CamelCard:
         else:
             self.type = "high_card"
 
+
 # instantiating a list of CamelCards, assigning arbitrary ranking for bubble sort
 list_of_hands = [
     CamelCard(hand=pair[0], bid=int(pair[1]), rank=idx)
@@ -62,21 +58,45 @@ list_of_hands = [
 n = len(list_of_hands)
 
 for i in range(n):
-    for j in range(0, n-i-1):
+    for j in range(0, n - i - 1):
         # comparing based on the hand type ranking
-        if hand_rankings[list_of_hands[j].type] < hand_rankings[list_of_hands[j+1].type]:
-            list_of_hands[j], list_of_hands[j+1] = list_of_hands[j+1], list_of_hands[j]
+        if (
+            hand_rankings[list_of_hands[j].type]
+            < hand_rankings[list_of_hands[j + 1].type]
+        ):
+            list_of_hands[j], list_of_hands[j + 1] = (
+                list_of_hands[j + 1],
+                list_of_hands[j],
+            )
             # swapping ranks as well
-            list_of_hands[j].rank, list_of_hands[j+1].rank = list_of_hands[j+1].rank, list_of_hands[j].rank
+            list_of_hands[j].rank, list_of_hands[j + 1].rank = (
+                list_of_hands[j + 1].rank,
+                list_of_hands[j].rank,
+            )
         # comparing based on the card rankings if hand type ranking is same
-        elif hand_rankings[list_of_hands[j].type] == hand_rankings[list_of_hands[j+1].type]:
-            card_a = [card_rankings[i] if i in card_rankings else int(i) for i in list_of_hands[j].hand]
-            card_b = [card_rankings[i] if i in card_rankings else int(i) for i in list_of_hands[j+1].hand]
+        elif (
+            hand_rankings[list_of_hands[j].type]
+            == hand_rankings[list_of_hands[j + 1].type]
+        ):
+            card_a = [
+                card_rankings[i] if i in card_rankings else int(i)
+                for i in list_of_hands[j].hand
+            ]
+            card_b = [
+                card_rankings[i] if i in card_rankings else int(i)
+                for i in list_of_hands[j + 1].hand
+            ]
             for ii, jj in zip(card_a, card_b):
                 if ii < jj:
-                    list_of_hands[j], list_of_hands[j+1] = list_of_hands[j+1], list_of_hands[j]
+                    list_of_hands[j], list_of_hands[j + 1] = (
+                        list_of_hands[j + 1],
+                        list_of_hands[j],
+                    )
                     # swapping ranks as well
-                    list_of_hands[j].rank, list_of_hands[j+1].rank = list_of_hands[j+1].rank, list_of_hands[j].rank
+                    list_of_hands[j].rank, list_of_hands[j + 1].rank = (
+                        list_of_hands[j + 1].rank,
+                        list_of_hands[j].rank,
+                    )
                     break
                 elif ii > jj:
                     break
