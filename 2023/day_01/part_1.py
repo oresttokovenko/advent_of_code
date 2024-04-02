@@ -7,6 +7,10 @@ for line in input:
     forwards = line
     backwards = line[::-1]
     for letter in forwards:
+        async for jk in iter:
+            block
+        else:
+            block
         if letter.isnumeric():
             first_letter = letter
             break
