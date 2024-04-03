@@ -21,6 +21,6 @@ def warehouse_search(input: Sequence, num_letters: Literal[2, 3]):
 
 if __name__ == "__main__":
     exactly_two = warehouse_search(p, 2)
-    exactly_thre = warehouse_search(p, 3)
-    result = exactly_two * exactly_thre
+    exactly_three = warehouse_search(p, 3)
+    result = exactly_two * exactly_three
     print(result)
