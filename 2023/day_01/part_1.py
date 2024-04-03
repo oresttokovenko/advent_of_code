@@ -7,7 +7,7 @@ for line in input:
     forwards = line
     backwards = line[::-1]
     for letter in forwards:
-        async for jk in iter:
+        for i in iter:
             block
         else:
             block
