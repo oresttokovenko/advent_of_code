@@ -26,6 +26,7 @@ select = [
     # isort
     "I",
 ]
+extend-select = ["I"]
 
 [tool.mypy]
 python_version = "3.12"
