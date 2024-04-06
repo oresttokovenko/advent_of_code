@@ -31,8 +31,8 @@ def guard_duty_parse(schedule: list[str]) -> defaultdict[int]:
 
 
 def maximum(schedule_parsed: defaultdict):
-    k = max(schedule_parsed, key=schedule_parsed.get)
-    return key, schedule_parsed[k]
+    key = max(schedule_parsed, key=schedule_parsed.get)
+    return key, schedule_parsed[key]
 
 
 if __name__ == "__main__":
