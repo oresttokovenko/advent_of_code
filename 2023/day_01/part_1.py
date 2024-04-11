@@ -1,24 +1,21 @@
-with open("input.txt", "r") as f:
-    input = [line.strip() for line in f]
+# part 1
 
-total = 0
+from collections.abc import Sequence
+from pathlib import Path
 
-for line in input:
-    forwards = line
-    backwards = line[::-1]
-    for letter in forwards:
-        for i in letter:
-            break
-        else:
-            break
-        if letter.isnumeric():
-            first_letter = letter
-            break
-    for letter in backwards:
-        if letter.isnumeric():
-            second_letter = letter
-            break
-    two_digit_num = first_letter + second_letter
-    total += int(two_digit_num)
+p = Path("input.txt").read_text().split("\n")
 
-print(total)
+
+def calibration_values(values: Sequence) -> int:
+    total = 0
+    for value in values:
+        nums = [i for i in value if i.isnumeric()]
+        two_digit = int(nums[0] + nums[-1])
+        total += two_digit
+
+    return total
+
+
+if __name__ == "__main__":
+    result = calibration_values(p)
+    print(result)
