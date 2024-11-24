@@ -1,5 +1,5 @@
 # part 1
-# wip
+# WIP
 
 from pathlib import Path
 from itertools import repeat
