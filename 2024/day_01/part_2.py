@@ -4,13 +4,17 @@ from pathlib import Path
 
 p = Path("input.txt").read_text().split()
 
-# splitting into two lists
-l = [int(i) for i in islice(p, 0, None, 2)]
-r = [int(i) for i in islice(p, 1, None, 2)]
 
-# counting occurrences of elements in r
-# multiplying each element in l by its count in r,
-# and computing the sum
-sim_score = sum([(i * Counter(r).get(i, 0)) for i in l])
+def split_list(input: list[str], start_iter: int) -> list[int]:
+    """splitting into two lists"""
+    return [int(i) for i in islice(input, start_iter, None, 2)]
 
-print(sim_score)
+
+if __name__ == "__main__":
+    l = split_list(p, 0)
+    r = split_list(p, 1)
+    # counting occurrences of elements in r
+    # multiplying each element in l by its count in r,
+    # and computing the sum
+    result = sum([(i * Counter(r).get(i, 0)) for i in l])
+    print(result)

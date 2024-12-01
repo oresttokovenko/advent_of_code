@@ -1,15 +1,16 @@
 from itertools import islice
 from pathlib import Path
 
-total_distance = 0
-
 p = Path("input.txt").read_text().split()
 
-# splitting into two lists and sorting in ascending order
-list_1 = sorted([int(i) for i in islice(p, 0, None, 2)])
-list_2 = sorted([int(i) for i in islice(p, 1, None, 2)])
 
-for i, j in zip(list_1, list_2, strict=False):
-    total_distance += abs(i - j)
+def split_and_sort_list(input: list[str], start_iter: int) -> list[int]:
+    """splitting into two lists and sorting in ascending order"""
+    return sorted([int(i) for i in islice(input, start_iter, None, 2)])
 
-print(total_distance)
+
+if __name__ == "__main__":
+    l = split_and_sort_list(p, 0)
+    r = split_and_sort_list(p, 1)
+    result = (total_distance := sum(abs(i - j) for i, j in zip(l, r, strict=False)))
+    print(result)
