@@ -1,6 +1,16 @@
-def main():
-    print("Hello World")
+from collections import Counter
+from itertools import islice
+from pathlib import Path
 
+p = Path("input.txt").read_text().split()
 
-if __name__ == "__main__":
-    main()
+# splitting into two lists and sorting in ascending order
+l = sorted([int(i) for i in islice(p, 0, None, 2)])
+r = sorted([int(i) for i in islice(p, 1, None, 2)])
+
+# counting occurrences of elements in r
+# multiplying each element in l by its count in r,
+# and computing the sum
+sim_score = sum([(i * Counter(r).get(i, 0)) for i in l])
+
+print(sim_score)
