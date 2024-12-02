@@ -12,5 +12,7 @@ def split_and_sort_list(input: list[str], start_iter: int) -> list[int]:
 if __name__ == "__main__":
     l = split_and_sort_list(p, 0)
     r = split_and_sort_list(p, 1)
+    # calculating the total distance by summing the absolute differences
+    # of paired ints from two zipped lists
     result = (total_distance := sum(abs(i - j) for i, j in zip(l, r, strict=False)))
     print(result)
