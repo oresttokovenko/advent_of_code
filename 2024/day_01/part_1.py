@@ -14,5 +14,5 @@ if __name__ == "__main__":
     r = split_and_sort_list(p, 1)
     # calculating the total distance by summing the absolute differences
     # of paired ints from two zipped lists
-    result = (total_distance := sum(abs(i - j) for i, j in zip(l, r, strict=False)))
+    result = sum(abs(i - j) for i, j in zip(l, r, strict=False))
     print(result)
