@@ -26,7 +26,7 @@ if __name__ == "__main__":
         try:
             value, test_values = line.split(": ")
         except ValueError:
-            continue
+            pass
         equations.append(Equation(value=int(value), test_values=[int(val) for val in test_values.split()]))
 
     for line in equations:
