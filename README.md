@@ -12,7 +12,7 @@ This repository contains my code submissions for Advent of Code, showcasing my s
 | 4   |      |      |      | ⭐    |      |      |      |      | ⭐⭐   |      |
 | 5   |      |      |      | ⭐    |      |      |      |      |      | ⭐⭐ |
 | 6   |      |      |      |      |      |      |      |      | ⭐⭐   |      |
-| 7   |      |      |      |      |      |      |      |      | ⭐⭐   |      |
+| 7   |      |      |      |      |      |      |      |      | ⭐⭐   | ⭐⭐ |
 | 8   |      |      |      |      |      |      |      |      | ⭐⭐   |      |
 | 9   |      |      |      |      |      |      |      |      | ⭐⭐   |      |
 | 10  |      |      |      |      |      |      |      |      |      |      |
