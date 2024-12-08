@@ -1,0 +1,35 @@
+from dataclasses import dataclass
+from pathlib import Path
+
+p = Path("input.txt").read_text().split("\n")
+
+
+@dataclass
+class Equation:
+    value: int
+    test_values: list[int]
+
+
+def calculate(nums: list[int]) -> list[int]:
+    """rescursively getting all combinations"""
+    if len(nums) == 1:
+        return nums
+    return calculate([nums[0] + nums[1]] + nums[2:]) + calculate([nums[0] * nums[1]] + nums[2:])
+
+
+if __name__ == "__main__":
+    equations = []
+    result = 0
+    for line in p:
+        if line != "":
+            value, test_values = line.split(": ")
+            equations.append(Equation(value=int(value), test_values=[int(val) for val in test_values.split()]))
+
+    for line in equations:
+        value = line.value
+        results = calculate(line.test_values)
+
+        if value in results:
+            result += value
+
+    print(result)
