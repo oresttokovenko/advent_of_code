@@ -21,9 +21,11 @@ if __name__ == "__main__":
     equations = []
     result = 0
     for line in p:
-        if line != "":
+        try:
             value, test_values = line.split(": ")
-            equations.append(Equation(value=int(value), test_values=[int(val) for val in test_values.split()]))
+        except ValueError:
+            pass
+        equations.append(Equation(value=int(value), test_values=[int(val) for val in test_values.split()]))
 
     for line in equations:
         value = line.value
