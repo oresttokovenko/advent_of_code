@@ -1,2 +1,4 @@
 version=0.28.1
 profile=default
+# Break function declarations to put body on new line when they don't fit on one line
+break-fun-decl=fit-or-vertical
