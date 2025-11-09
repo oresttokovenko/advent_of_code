@@ -1,2 +1,2 @@
-let main () = Printf.printf "Hello World\n"
+let main () = Printf.printf "Hello, Day 1 Part 1!\n"
 let () = main ()

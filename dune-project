@@ -4,5 +4,5 @@
 (package
  (name advent_of_code)
  (depends
-  (ocaml (>= 5.2))
+  (ocaml (>= 5.4))
   containers))
